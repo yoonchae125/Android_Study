@@ -1,0 +1,1 @@
+# BroadcastReceiver를 이용한 서버 통신 로직 분리 (AsyncTask와 렌더링하는 Activity 분리하기)
