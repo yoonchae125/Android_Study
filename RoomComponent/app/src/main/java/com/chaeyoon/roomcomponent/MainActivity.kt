@@ -1,9 +1,9 @@
 package com.chaeyoon.roomcomponent
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaeyoon.roomcomponent.db.CatDB
 import com.chaeyoon.roomcomponent.entity.Cat
@@ -11,15 +11,16 @@ import com.chaeyoon.roomcomponent.ui.CatRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var catDb : CatDB? = null
+    private var catDb: CatDB? = null
     private var catList = listOf<Cat>()
-    private lateinit var mAdapter:CatRecyclerViewAdapter
+    private lateinit var mAdapter: CatRecyclerViewAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        catDb = CatDB.getInstance(this)
 
+        catDb = CatDB.getInstance(this)
         mAdapter = CatRecyclerViewAdapter(this, catList)
 
         val r = Runnable {
@@ -45,4 +46,11 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    override fun onDestroy() {
+        CatDB.destroyInstance()
+        catDb = null
+        super.onDestroy()
+    }
+
 }

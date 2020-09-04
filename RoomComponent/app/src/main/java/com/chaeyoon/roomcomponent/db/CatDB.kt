@@ -8,9 +8,10 @@ import androidx.room.RoomDatabase
 import com.chaeyoon.roomcomponent.dao.CatDao
 import com.chaeyoon.roomcomponent.entity.Cat
 
-@Database(entities = [Cat::class], version = 1, exportSchema = false)
+@Database(entities = [Cat::class], version = 1)
 abstract class CatDB :RoomDatabase(){
     abstract fun catDao():CatDao
+
     companion object {
         private var INSTANCE: CatDB? = null
 
@@ -18,7 +19,7 @@ abstract class CatDB :RoomDatabase(){
             if (INSTANCE == null) {
                 synchronized(CatDB::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        CatDB::class.java, "cat")
+                        CatDB::class.java, "cat.db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

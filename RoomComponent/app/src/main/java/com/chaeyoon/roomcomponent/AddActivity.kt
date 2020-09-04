@@ -15,8 +15,8 @@ class AddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add)
 
         catDb = CatDB.getInstance(this)
+        val dao = catDb!!.catDao()
 
-        /* 새로운 cat 객체를 생성, id 이외의 값을 지정 후 DB에 추가 */
         val addRunnable = Runnable {
             val newCat = Cat(
                 0,
@@ -25,6 +25,7 @@ class AddActivity : AppCompatActivity() {
                 addOrigin.text.toString(),
 
             )
+            dao.insert(newCat)
         }
 
         addBtn.setOnClickListener {
